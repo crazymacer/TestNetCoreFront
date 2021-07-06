@@ -1,0 +1,47 @@
+<app-layout>
+  <div class="row my-4 mx-3">
+    <div class="card">
+      <div class="card-header">
+        <h2>Productos</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <h3>Administrar Producto</h3>
+          <div class="col-6">
+            <form [formGroup]="productoForm" (ngSubmit)="productFormSubmit()">
+              <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Stock</label>
+                <input type="number" class="form-control" formControlName="stock">
+              </div>
+              <div class="mb-3">
+                <button type="submit" class="btn btn-primary" [disabled]="!this.productoForm.valid">Guardar</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-6">
+            <h3>Listado de Productos</h3>
+            <table class="table table-sm">
+
+              <tr *ngFor="let prod of productos">
+                <td>{{prod.nombre}}</td>
+                <td>{{prod.stock}}</td>
+                <td>{{prod.fechaRegistro | date:'dd/MM/yyyy HH:mm'}}</td>
+                <td>
+                  <div>
+                    <button type="button" class="btn btn-primary btn-sm"  (click)="editProduct(prod)">Editar</button> &nbsp;
+                  <button type="button" (click)="deleteProduct(prod.id??0)" class="btn btn-danger btn-sm">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout>
